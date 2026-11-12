@@ -5,6 +5,7 @@ import { CLAUDE_CAPABILITY_STATICS } from "#model/provider-capabilities";
 import { claudeCliModel } from "#model/routing";
 import type { BucketScope } from "../execution/bucket-id";
 import { deriveBucketId } from "../execution/bucket-id";
+import { claudePermissionArgs } from "../execution/claude-permissions";
 import {
   newClaudeSessionId,
   retainClaudeSession,
@@ -746,8 +747,7 @@ export class ClaudeCodeCliTransport implements ProviderTransport {
       "",
       "--tools",
       request.tools.join(","),
-      "--permission-mode",
-      "bypassPermissions",
+      ...claudePermissionArgs(request.tools),
       "--model",
       claudeCliModel(request.route),
       "--effort",

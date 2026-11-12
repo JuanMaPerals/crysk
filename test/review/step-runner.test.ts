@@ -173,7 +173,14 @@ describe("buildStepArgv", () => {
     expect(flagValue(argv, "--tools")).toBe(
       "Read,Grep,Glob,mcp__codegraph__codegraph_explore",
     );
-    expect(flagValue(argv, "--permission-mode")).toBe("bypassPermissions");
+    expect(flagValue(argv, "--permission-mode")).toBe("dontAsk");
+    expect(flagValue(argv, "--permission-prompts")).toBe("none");
+    // The allow-list is exactly the step's own tools: nothing else is approved.
+    expect(flagValue(argv, "--allowedTools")).toBe(
+      "Read,Grep,Glob,mcp__codegraph__codegraph_explore",
+    );
+    expect(argv).not.toContain("bypassPermissions");
+    expect(argv).not.toContain("--dangerously-skip-permissions");
     expect(flagValue(argv, "--model")).toBe(spec.model);
     expect(argv).toContain("--exclude-dynamic-system-prompt-sections");
   });

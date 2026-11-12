@@ -1539,7 +1539,10 @@ describe("ClaudeCodeCliTransport prompt delivery and isolation argv (#314)", () 
     // read as the setting sources.
     expect(flagValue("--setting-sources")).toBe("");
     expect(flagValue("--tools")).toBe("Read,Grep");
-    expect(flagValue("--permission-mode")).toBe("bypassPermissions");
+    expect(flagValue("--permission-mode")).toBe("dontAsk");
+    expect(flagValue("--permission-prompts")).toBe("none");
+    expect(flagValue("--allowedTools")).toBe("Read,Grep");
+    expect(args).not.toContain("bypassPermissions");
     expect(flagValue("--output-format")).toBe("json");
     expect(flagValue("--append-system-prompt-file")).toBe(
       "/tmp/pr-hero-test/system.md",
@@ -1572,9 +1575,8 @@ describe("ClaudeCodeCliTransport prompt delivery and isolation argv (#314)", () 
     expect(args).not.toContain("--mcp-config");
     expect(args).not.toContain("--strict-mcp-config");
     expect(args[args.indexOf("--setting-sources") + 1]).toBe("");
-    expect(args[args.indexOf("--permission-mode") + 1]).toBe(
-      "bypassPermissions",
-    );
+    expect(args[args.indexOf("--permission-mode") + 1]).toBe("dontAsk");
+    expect(args[args.indexOf("--allowedTools") + 1]).toBe("Read");
     expect(args[args.indexOf("--tools") + 1]).toBe("Read");
   });
 });

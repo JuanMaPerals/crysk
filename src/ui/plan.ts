@@ -278,8 +278,8 @@ function baseSourceTag(ctx: PlanContext): string {
 // true, and read at most once — so it does not belong between the operator
 // and the yes/no they are about to give.
 const PERMISSIONS_NOTE =
-  "steps run with --permission-mode bypassPermissions, bounded only by " +
-  "each agent's read-only tool allow-list";
+  "steps run with --permission-mode dontAsk: only each agent's own " +
+  "tool allow-list is approved, everything else is denied";
 
 function agentRow(
   ctx: {
@@ -521,7 +521,7 @@ export function planEstimateLine(input: {
 //
 // WHY: that default is 11 and "permissions" is 11 characters, so padEnd() gave
 // it no gap and the live run printed
-// `permissionssteps run with --permission-mode bypassPermissions…` — one word
+// `permissionssteps run with --permission-mode dontAsk…` — one word
 // welded out of two columns. Deriving the width means the next label longer
 // than any of today's cannot bring the collision back.
 function detailRows(

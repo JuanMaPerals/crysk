@@ -8,6 +8,7 @@
 import type { Effort } from "#model/catalog";
 import type { CredentialKind } from "#model/provider-capabilities";
 import type { AttemptAdmissionGate } from "../execution/admission";
+import { claudePermissionArgs } from "../execution/claude-permissions";
 import type {
   AuthEvent,
   DenialCode,
@@ -212,8 +213,7 @@ export function buildStepArgv(step: StepSpec): string[] {
     "",
     "--tools",
     step.tools.join(","),
-    "--permission-mode",
-    "bypassPermissions",
+    ...claudePermissionArgs(step.tools),
     "--model",
     step.model,
     "--effort",

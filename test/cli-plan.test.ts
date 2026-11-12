@@ -322,7 +322,8 @@ describe("planDetails", () => {
     // the piece that cannot straddle the break.
     expect(text).toContain("merge base of main and");
     expect(text).toContain("only what this branch adds is reviewed");
-    expect(text).toContain("bypassPermissions");
+    expect(text).toContain("--permission-mode dontAsk");
+    expect(text).not.toContain("bypassPermissions");
     expect(text).toContain("codegraph_explore is live");
   });
 
@@ -481,7 +482,8 @@ describe("prPlanDetails", () => {
     expect(text).toContain("operator checkout; gh and git run here");
     expect(text).toContain("the PR's head commit");
     expect(text).toContain("2222222222222222222222222222222222222222");
-    expect(text).toContain("bypassPermissions");
+    expect(text).toContain("--permission-mode dontAsk");
+    expect(text).not.toContain("bypassPermissions");
   });
 
   test("pre-fetch the diff row says where the band came from", () => {
